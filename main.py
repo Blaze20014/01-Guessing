@@ -3,8 +3,9 @@ import sys, time
 
 assert sys.version_info >= (3,7), "This script requires at least Python 3.7"
 
-compRandom = str(random.randint(1, 100))
+compRandom = random.randint(1, 100)
 correctGuess = False
+guesses = 0
 
 print("Running GLaDOS_Installer_V1.14.2")
 time.sleep(1)
@@ -28,12 +29,29 @@ print("... or try to at least")
 time.sleep(3)
 
 while(correctGuess == False):
-    playerGuess = input("Enter a number from 1 to 100")
+    playerGuess = input("Enter a number from 1 to 100: ")
 
-    if(playerGuess > compRandom):
+    if(int(playerGuess) > compRandom):
         print("Your guess is too high")
-    elif(playerGuess < compRandom):
-       print("Your guess is too low")
-    else:
-       print("Your Correct, good job")
-       correctGuess = True
+        guesses = guesses + 1
+    elif(int(playerGuess) < compRandom):
+        print("Your guess is too low")
+        guesses = guesses + 1
+    elif(int(playerGuess) == compRandom):
+        print("Your Correct")
+        guesses = guesses + 1
+        correctGuess = True
+
+time.sleep(2)
+print("GLaDOS: Congratulations... You Win... I guess")
+time.sleep(3)
+print("Lets see how many guesses it took: ")
+time.sleep(2)
+if(guesses == 1):
+    print("I'd applaud you for getting it in one guess")
+elif(guesses > 5):
+    print("Haha, you fool. You took an absurd " + str(guesses) + " guesses to reach a simple number...")
+else:
+    print("You did decent I guess what with " + str(guesses) + " guesses")
+
+print("I'll come back with another test soon enough")
